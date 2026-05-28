@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Animations</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-logo">STUDIO</div>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="line" data-scroll="fade-up" data-delay="0">We Create</span>
+                <span class="line" data-scroll="fade-up" data-delay="1">Digital</span>
+                <span class="line highlight" data-scroll="fade-up" data-delay="2">Experiences</span>
+            </h1>
+            <p class="hero-subtitle" data-scroll="fade-up" data-delay="3">Scroll down to explore the magic</p>
+            <div class="scroll-indicator" data-scroll="fade-up" data-delay="4">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </section>
+
+    <!-- Text Reveal Section -->
+    <section class="text-reveal-section">
+        <div class="container">
+            <p class="reveal-text" data-scroll="text-reveal">
+                We believe in the power of design to transform brands and create meaningful connections with audiences around the world.
+            </p>
+        </div>
+    </section>
+
+    <!-- About Section with Parallax -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="split-content">
+                <div class="split-left" data-scroll="slide-right">
+                    <span class="label">About Us</span>
+                    <h2>Crafting Digital Masterpieces Since 2020</h2>
+                    <p>We are a team of passionate designers and developers who love creating beautiful, functional websites that tell stories through motion and interaction.</p>
+                </div>
+                <div class="split-right" data-scroll="slide-left">
+                    <div class="image-wrapper parallax-container">
+                        <div class="parallax-image about-img"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Counter Section -->
+    <section class="counter-section">
+        <div class="container">
+            <div class="counters">
+                <div class="counter-item" data-scroll="scale-up" data-delay="0">
+                    <span class="counter-number" data-target="150">0</span>
+                    <span class="counter-suffix">+</span>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="counter-item" data-scroll="scale-up" data-delay="1">
+                    <span class="counter-number" data-target="50">0</span>
+                    <span class="counter-suffix">+</span>
+                    <p>Happy Clients</p>
+                </div>
+                <div class="counter-item" data-scroll="scale-up" data-delay="2">
+                    <span class="counter-number" data-target="5">0</span>
+                    <span class="counter-suffix"></span>
+                    <p>Years Experience</p>
+                </div>
+                <div class="counter-item" data-scroll="scale-up" data-delay="3">
+                    <span class="counter-number" data-target="25">0</span>
+                    <span class="counter-suffix">+</span>
+                    <p>Team Members</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-header" data-scroll="fade-up">
+                <span class="label">What We Do</span>
+                <h2>Our Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-scroll="flip-up" data-delay="0">
+                    <div class="service-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3>Web Design</h3>
+                    <p>Beautiful, responsive websites that captivate your audience and drive results.</p>
+                </div>
+                <div class="service-card" data-scroll="flip-up" data-delay="1">
+                    <div class="service-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3>Development</h3>
+                    <p>Clean, efficient code that brings designs to life with seamless functionality.</p>
+                </div>
+                <div class="service-card" data-scroll="flip-up" data-delay="2">
+                    <div class="service-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <h3>Branding</h3>
+                    <p>Strategic brand identity that resonates with your target market.</p>
+                </div>
+                <div class="service-card" data-scroll="flip-up" data-delay="3">
+                    <div class="service-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    <h3>Animation</h3>
+                    <p>Engaging motion design that brings your digital products to life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horizontal Scroll Gallery -->
+    <section class="horizontal-section">
+        <div class="container">
+            <div class="section-header" data-scroll="fade-up">
+                <span class="label">Portfolio</span>
+                <h2>Featured Work</h2>
+            </div>
+        </div>
+        <div class="horizontal-scroll-wrapper">
+            <div class="horizontal-track">
+                <div class="gallery-item" data-scroll="zoom-in">
+                    <div class="gallery-image gi-1"></div>
+                    <div class="gallery-overlay">
+                        <h3>Project Alpha</h3>
+                        <p>Web Design / Development</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-scroll="zoom-in">
+                    <div class="gallery-image gi-2"></div>
+                    <div class="gallery-overlay">
+                        <h3>Brand Vision</h3>
+                        <p>Branding / Identity</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-scroll="zoom-in">
+                    <div class="gallery-image gi-3"></div>
+                    <div class="gallery-overlay">
+                        <h3>Motion Flow</h3>
+                        <p>Animation / Motion</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-scroll="zoom-in">
+                    <div class="gallery-image gi-4"></div>
+                    <div class="gallery-overlay">
+                        <h3>Digital Wave</h3>
+                        <p>Web App / SaaS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stacking Cards Section -->
+    <section id="work" class="stacking-section">
+        <div class="container">
+            <div class="section-header" data-scroll="fade-up">
+                <span class="label">Process</span>
+                <h2>How We Work</h2>
+            </div>
+            <div class="stacking-cards">
+                <div class="stack-card" data-scroll="stack" data-delay="0" style="--card-color: #6c5ce7;">
+                    <div class="stack-card-content">
+                        <span class="step-number">01</span>
+                        <h3>Discovery</h3>
+                        <p>We dive deep into understanding your brand, audience, and goals to create a solid foundation.</p>
+                    </div>
+                </div>
+                <div class="stack-card" data-scroll="stack" data-delay="1" style="--card-color: #a29bfe;">
+                    <div class="stack-card-content">
+                        <span class="step-number">02</span>
+                        <h3>Design</h3>
+                        <p>Our designers craft stunning visuals that align with your brand and engage your audience.</p>
+                    </div>
+                </div>
+                <div class="stack-card" data-scroll="stack" data-delay="2" style="--card-color: #fd79a8;">
+                    <div class="stack-card-content">
+                        <span class="step-number">03</span>
+                        <h3>Develop</h3>
+                        <p>We build with clean, modern code ensuring performance and scalability.</p>
+                    </div>
+                </div>
+                <div class="stack-card" data-scroll="stack" data-delay="3" style="--card-color: #00cec9;">
+                    <div class="stack-card-content">
+                        <span class="step-number">04</span>
+                        <h3>Launch</h3>
+                        <p>We deploy your project and provide ongoing support to ensure continued success.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Section -->
+    <section class="marquee-section">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                <span>DESIGN</span>
+                <span class="dot"></span>
+                <span>DEVELOP</span>
+                <span class="dot"></span>
+                <span>ANIMATE</span>
+                <span class="dot"></span>
+                <span>INNOVATE</span>
+                <span class="dot"></span>
+                <span>DESIGN</span>
+                <span class="dot"></span>
+                <span>DEVELOP</span>
+                <span class="dot"></span>
+                <span>ANIMATE</span>
+                <span class="dot"></span>
+                <span>INNOVATE</span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header" data-scroll="fade-up">
+                <span class="label">Testimonials</span>
+                <h2>What Clients Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-scroll="rotate-in" data-delay="0">
+                    <div class="quote-icon">"</div>
+                    <p>Working with this team was an absolute game-changer for our brand. The scroll animations on our site increased engagement by 40%.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar av-1"></div>
+                        <div>
+                            <strong>Sarah Johnson</strong>
+                            <span>CEO, TechStart</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-scroll="rotate-in" data-delay="1">
+                    <div class="quote-icon">"</div>
+                    <p>The attention to detail in every animation is remarkable. Our users love the interactive experience they've created.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar av-2"></div>
+                        <div>
+                            <strong>Mike Chen</strong>
+                            <span>CTO, DesignLab</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-scroll="rotate-in" data-delay="2">
+                    <div class="quote-icon">"</div>
+                    <p>Simply outstanding. The website they built for us stands out from everything else in our industry. Pure creativity.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar av-3"></div>
+                        <div>
+                            <strong>Emily Davis</strong>
+                            <span>Founder, Artistry</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-content" data-scroll="fade-up">
+                <h2>Let's Create Something <span class="highlight">Amazing</span> Together</h2>
+                <p>Ready to bring your vision to life with stunning scroll animations?</p>
+                <a href="#" class="cta-button" data-scroll="scale-up" data-delay="1">
+                    <span>Get In Touch</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>STUDIO</h3>
+                    <p>Creating digital experiences that inspire.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Dribbble</a>
+                    <a href="#">LinkedIn</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Studio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
