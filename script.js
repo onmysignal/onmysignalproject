@@ -5,22 +5,8 @@
 
 // Wait for everything to load
 window.addEventListener('load', () => {
-    initLoader();
+    initApp();
 });
-
-// ============================================
-// PAGE LOADER (faster - 1.5s instead of 2.5s)
-// ============================================
-function initLoader() {
-    const loader = document.querySelector('.loader');
-    
-    setTimeout(() => {
-        loader.classList.add('loaded');
-        setTimeout(() => {
-            initApp();
-        }, 200);
-    }, 1500);
-}
 
 // ============================================
 // MAIN APP INIT

@@ -8,18 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Page Loader -->
-    <div class="loader">
-        <div class="loader-inner">
-            <div class="loader-text">
-                <span>S</span><span>T</span><span>U</span><span>D</span><span>I</span><span>O</span>
-            </div>
-            <div class="loader-bar">
-                <div class="loader-progress"></div>
-            </div>
-        </div>
-    </div>
-
     <!-- Noise/Grain Overlay -->
     <div class="grain-overlay"></div>
 
@@ -42,43 +30,73 @@
     <!-- Scroll Progress -->
     <div class="scroll-progress"></div>
 
-    <!-- Hero Section -->
+    <!-- Hero Section — Split Layout -->
     <section id="hero" class="hero">
-        <div class="hero-content">
-            <div class="hero-eyebrow">
-                <span class="line-reveal">Digital Design Studio</span>
+        <div class="hero-split">
+            <div class="hero-left">
+                <div class="hero-tag">
+                    <span class="tag-dot"></span>
+                    <span>Available for projects — 2025</span>
+                </div>
+                <h1 class="hero-title">
+                    <div class="title-line"><span class="char-reveal">Building</span></div>
+                    <div class="title-line"><span class="char-reveal">the future of</span></div>
+                    <div class="title-line"><span class="char-reveal highlight">the web.</span></div>
+                </h1>
+                <p class="hero-description line-reveal">
+                    We design and develop bold digital products — websites, brands, and experiences that move people.
+                </p>
+                <div class="hero-cta line-reveal">
+                    <a href="#work" class="btn-primary">
+                        <span>See Projects</span>
+                        <div class="btn-arrow">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </div>
+                    </a>
+                    <a href="#contact" class="btn-secondary">
+                        <span>Get in Touch</span>
+                    </a>
+                </div>
             </div>
-            <h1 class="hero-title">
-                <div class="title-line">
-                    <span class="char-reveal">We Create</span>
-                </div>
-                <div class="title-line">
-                    <span class="char-reveal">Digital</span>
-                </div>
-                <div class="title-line">
-                    <span class="char-reveal highlight">Experiences</span>
-                </div>
-            </h1>
-            <p class="hero-description line-reveal">
-                Award-winning digital studio crafting immersive web experiences through motion, design, and technology.
-            </p>
-            <div class="hero-cta line-reveal">
-                <a href="#work" class="btn-primary">
-                    <span>View Our Work</span>
-                    <div class="btn-arrow">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                        </svg>
+            <div class="hero-right">
+                <div class="hero-visual">
+                    <div class="visual-card card-1 line-reveal">
+                        <div class="card-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <span>Design Systems</span>
                     </div>
-                </a>
-                <a href="#contact" class="btn-secondary">
-                    <span>Let's Talk</span>
-                </a>
+                    <div class="visual-card card-2 line-reveal">
+                        <div class="card-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                        </div>
+                        <span>Fast Performance</span>
+                    </div>
+                    <div class="visual-card card-3 line-reveal">
+                        <div class="card-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M2 12h20"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                        <span>Global Reach</span>
+                    </div>
+                    <div class="hero-shape"></div>
+                </div>
             </div>
         </div>
         <div class="hero-scroll-indicator">
             <div class="scroll-line"></div>
-            <span>Scroll to explore</span>
+            <span>Scroll</span>
         </div>
         <div class="hero-bg">
             <div class="gradient-orb orb-1"></div>
