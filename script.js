@@ -16,7 +16,6 @@ function initApp() {
     initNavbar();
     initHeroAnimations();
     initScrollReveal();
-    initTextReveal();
     initImageReveal();
     initCounters();
     initSmoothNav();
@@ -115,47 +114,6 @@ function initScrollReveal() {
 }
 
 // ============================================
-// TEXT REVEAL (Word by word on scroll)
-// ============================================
-function initTextReveal() {
-    const textElements = document.querySelectorAll('.big-text-reveal');
-
-    textElements.forEach(el => {
-        const text = el.textContent.trim();
-        const words = text.split(' ');
-        el.innerHTML = words.map(word => `<span class="word">${word}</span>`).join(' ');
-    });
-
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                textElements.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    const windowHeight = window.innerHeight;
-
-                    if (rect.top < windowHeight * 0.85 && rect.bottom > 0) {
-                        const words = el.querySelectorAll('.word');
-                        const progress = Math.max(0, 1 - (rect.top / (windowHeight * 0.6)));
-                        const wordsToReveal = Math.floor(progress * words.length * 1.2);
-
-                        words.forEach((word, index) => {
-                            if (index < wordsToReveal) {
-                                word.classList.add('active');
-                            } else {
-                                word.classList.remove('active');
-                            }
-                        });
-                    }
-                });
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }, { passive: true });
-}
-
-// ============================================
 // IMAGE CLIP-PATH REVEAL
 // ============================================
 function initImageReveal() {
@@ -180,23 +138,20 @@ function initImageReveal() {
 // ANIMATED COUNTERS
 // ============================================
 function initCounters() {
-    const counters = document.querySelectorAll('.stat-number');
-    let animated = false;
+    const allCounters = document.querySelectorAll('.stat-number');
+    let animated = new Set();
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && !animated) {
-                animated = true;
-                counters.forEach(counter => {
-                    const target = parseInt(counter.getAttribute('data-target'));
-                    animateCount(counter, target);
-                });
+            if (entry.isIntersecting && !animated.has(entry.target)) {
+                animated.add(entry.target);
+                const target = parseInt(entry.target.getAttribute('data-target'));
+                animateCount(entry.target, target);
             }
         });
     }, { threshold: 0.5 });
 
-    const statsSection = document.querySelector('.about-stats');
-    if (statsSection) observer.observe(statsSection);
+    allCounters.forEach(counter => observer.observe(counter));
 }
 
 function animateCount(element, target) {
