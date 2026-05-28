@@ -3,131 +3,382 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STUDIO</title>
+    <title>STUDIO — Digital Experiences</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Noise/Grain Overlay -->
+    <div class="grain-overlay"></div>
 
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-logo">STUDIO</div>
         <div class="nav-links">
-            <a href="#work">Work</a>
+            <a href="#hero">Home</a>
             <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#work">Work</a>
             <a href="#contact">Contact</a>
+        </div>
+        <div class="nav-menu-btn">
+            <span></span>
+            <span></span>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section id="hero" class="hero">
-        <h1 class="hero-title">
-            <span class="reveal">Building the</span>
-            <span class="reveal">future of <em>the web.</em></span>
-        </h1>
-        <p class="hero-sub reveal">Design & development studio crafting bold digital experiences.</p>
-    </section>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress"></div>
 
-    <!-- Work Section -->
-    <section id="work" class="section">
-        <div class="container">
-            <h2 class="section-title scroll-reveal">Selected Work</h2>
-            <div class="work-grid">
-                <a href="#" class="work-item scroll-reveal">
-                    <div class="work-image wi-1"></div>
-                    <div class="work-info">
-                        <h3>Project Aurora</h3>
-                        <span>Web Design</span>
+    <!-- Hero Section — Minimal -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <div class="title-line"><span class="char-reveal">Building the</span></div>
+                <div class="title-line"><span class="char-reveal">future of <em>the web.</em></span></div>
+            </h1>
+            <p class="hero-description line-reveal">
+                Design & development studio crafting bold digital experiences.
+            </p>
+            <div class="hero-cta line-reveal">
+                <a href="#work" class="btn-primary">
+                    <span>See Projects</span>
+                    <div class="btn-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
                     </div>
                 </a>
-                <a href="#" class="work-item scroll-reveal">
-                    <div class="work-image wi-2"></div>
-                    <div class="work-info">
-                        <h3>Brand Nebula</h3>
-                        <span>Identity</span>
-                    </div>
-                </a>
-                <a href="#" class="work-item scroll-reveal">
-                    <div class="work-image wi-3"></div>
-                    <div class="work-info">
-                        <h3>Motion Flux</h3>
-                        <span>Animation</span>
-                    </div>
-                </a>
-                <a href="#" class="work-item scroll-reveal">
-                    <div class="work-image wi-4"></div>
-                    <div class="work-info">
-                        <h3>Digital Horizon</h3>
-                        <span>Web App</span>
-                    </div>
+                <a href="#contact" class="btn-secondary">
+                    <span>Get in Touch</span>
                 </a>
             </div>
+        </div>
+    </section>
+
+    <!-- Text Reveal Section -->
+    <section class="text-reveal-section">
+        <div class="container">
+            <p class="big-text-reveal">
+                We believe in the power of design to transform brands and create meaningful connections with audiences around the world. Every pixel tells a story.
+            </p>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section section-dark">
+    <section id="about" class="about-section">
         <div class="container">
+            <div class="section-label scroll-reveal">
+                <span class="label-line"></span>
+                <span>About Us</span>
+            </div>
             <div class="about-grid">
-                <h2 class="section-title scroll-reveal">We design with<br>purpose and build<br>with <em>precision.</em></h2>
-                <div class="about-text">
-                    <p class="scroll-reveal">A small team of designers and developers focused on creating meaningful digital experiences that are simple, fast, and beautiful.</p>
-                    <div class="stats scroll-reveal">
-                        <div class="stat"><span class="stat-num" data-target="50">0</span><span class="stat-label">Clients</span></div>
-                        <div class="stat"><span class="stat-num" data-target="120">0</span><span class="stat-label">Projects</span></div>
-                        <div class="stat"><span class="stat-num" data-target="5">0</span><span class="stat-label">Years</span></div>
+                <div class="about-left">
+                    <h2 class="section-title scroll-reveal">
+                        Crafting digital<br>
+                        <span class="highlight">masterpieces</span> since<br>
+                        2020
+                    </h2>
+                </div>
+                <div class="about-right">
+                    <p class="scroll-reveal">We are a collective of designers, developers, and creative thinkers who transform ideas into immersive digital experiences.</p>
+                    <p class="scroll-reveal">Our approach combines strategic thinking with cutting-edge technology to deliver results that exceed expectations.</p>
+                    <div class="about-stats scroll-reveal">
+                        <div class="stat">
+                            <span class="stat-number" data-target="150">0</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-target="50">0</span>
+                            <span class="stat-label">Clients</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-target="12">0</span>
+                            <span class="stat-label">Awards</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image-container scroll-reveal">
+                <div class="image-reveal">
+                    <div class="about-image"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-label scroll-reveal">
+                <span class="label-line"></span>
+                <span>What We Do</span>
+            </div>
+            <h2 class="section-title scroll-reveal">Our Services</h2>
+            <div class="services-list">
+                <div class="service-item scroll-reveal">
+                    <div class="service-number">01</div>
+                    <div class="service-content">
+                        <h3>Web Design & Development</h3>
+                        <p>Pixel-perfect, responsive websites built with modern frameworks and seamless animations.</p>
+                    </div>
+                    <div class="service-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="service-item scroll-reveal">
+                    <div class="service-number">02</div>
+                    <div class="service-content">
+                        <h3>Brand Identity & Strategy</h3>
+                        <p>Complete brand systems that resonate with your audience and stand out in the market.</p>
+                    </div>
+                    <div class="service-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="service-item scroll-reveal">
+                    <div class="service-number">03</div>
+                    <div class="service-content">
+                        <h3>Motion Design & Animation</h3>
+                        <p>Captivating motion graphics and micro-interactions that bring interfaces to life.</p>
+                    </div>
+                    <div class="service-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="service-item scroll-reveal">
+                    <div class="service-number">04</div>
+                    <div class="service-content">
+                        <h3>Creative Direction</h3>
+                        <p>Strategic creative vision that guides every aspect of your digital presence.</p>
+                    </div>
+                    <div class="service-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services -->
-    <section class="section">
+    <!-- Marquee Section -->
+    <section class="marquee-section">
+        <div class="marquee">
+            <div class="marquee-inner">
+                <span>DESIGN</span>
+                <span class="outlined">DEVELOP</span>
+                <span>ANIMATE</span>
+                <span class="outlined">INNOVATE</span>
+                <span>CREATE</span>
+                <span class="outlined">INSPIRE</span>
+                <span>DESIGN</span>
+                <span class="outlined">DEVELOP</span>
+                <span>ANIMATE</span>
+                <span class="outlined">INNOVATE</span>
+                <span>CREATE</span>
+                <span class="outlined">INSPIRE</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work/Portfolio Section -->
+    <section id="work" class="work-section">
         <div class="container">
-            <h2 class="section-title scroll-reveal">Services</h2>
-            <div class="services">
-                <div class="service-row scroll-reveal">
-                    <span class="service-num">01</span>
-                    <h3>Web Design & Development</h3>
+            <div class="section-label scroll-reveal">
+                <span class="label-line"></span>
+                <span>Selected Work</span>
+            </div>
+            <h2 class="section-title scroll-reveal">Featured Projects</h2>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card scroll-reveal">
+                <div class="project-image-wrapper">
+                    <div class="project-image pi-1"></div>
                 </div>
-                <div class="service-row scroll-reveal">
-                    <span class="service-num">02</span>
-                    <h3>Brand Identity</h3>
+                <div class="project-info">
+                    <span class="project-category">Web Design / Development</span>
+                    <h3>Project Aurora</h3>
                 </div>
-                <div class="service-row scroll-reveal">
-                    <span class="service-num">03</span>
-                    <h3>Motion & Animation</h3>
+            </div>
+            <div class="project-card scroll-reveal">
+                <div class="project-image-wrapper">
+                    <div class="project-image pi-2"></div>
                 </div>
-                <div class="service-row scroll-reveal">
-                    <span class="service-num">04</span>
-                    <h3>Creative Direction</h3>
+                <div class="project-info">
+                    <span class="project-category">Branding / Identity</span>
+                    <h3>Brand Nebula</h3>
+                </div>
+            </div>
+            <div class="project-card scroll-reveal">
+                <div class="project-image-wrapper">
+                    <div class="project-image pi-3"></div>
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Motion / Animation</span>
+                    <h3>Motion Flux</h3>
+                </div>
+            </div>
+            <div class="project-card scroll-reveal">
+                <div class="project-image-wrapper">
+                    <div class="project-image pi-4"></div>
+                </div>
+                <div class="project-info">
+                    <span class="project-category">Web App / SaaS</span>
+                    <h3>Digital Horizon</h3>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="section section-dark">
-        <div class="container contact-content">
-            <h2 class="big-cta scroll-reveal">Let's work<br><em>together.</em></h2>
-            <a href="mailto:hello@studio.com" class="contact-link scroll-reveal">hello@studio.com</a>
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-label scroll-reveal">
+                <span class="label-line"></span>
+                <span>Our Process</span>
+            </div>
+            <h2 class="section-title scroll-reveal">How We Work</h2>
+            <div class="process-steps">
+                <div class="process-step scroll-reveal">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Discovery & Research</h3>
+                        <p>Deep dive into your brand, audience, and market to uncover opportunities.</p>
+                    </div>
+                </div>
+                <div class="process-step scroll-reveal">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Strategy & Concept</h3>
+                        <p>Develop a creative roadmap that aligns with your business objectives.</p>
+                    </div>
+                </div>
+                <div class="process-step scroll-reveal">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Design & Prototype</h3>
+                        <p>Craft stunning visuals and interactive prototypes for validation.</p>
+                    </div>
+                </div>
+                <div class="process-step scroll-reveal">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h3>Develop & Launch</h3>
+                        <p>Build with clean code, test rigorously, and deploy with confidence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-label scroll-reveal">
+                <span class="label-line"></span>
+                <span>Testimonials</span>
+            </div>
+            <h2 class="section-title scroll-reveal">What Clients Say</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial-item scroll-reveal">
+                    <div class="testimonial-quote">
+                        <p>"The scroll animations on our site increased engagement by 40%. This team truly understands the intersection of design and technology."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar av-1"></div>
+                        <div class="author-info">
+                            <strong>Sarah Johnson</strong>
+                            <span>CEO, TechStart</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item scroll-reveal">
+                    <div class="testimonial-quote">
+                        <p>"Every interaction feels intentional and premium. Our users constantly compliment the smoothness and creativity of the experience."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar av-2"></div>
+                        <div class="author-info">
+                            <strong>Mike Chen</strong>
+                            <span>CTO, DesignLab</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title scroll-reveal">
+                    <span>Let's create</span>
+                    <span>something</span>
+                    <span class="highlight">extraordinary</span>
+                </h2>
+                <p class="cta-description scroll-reveal">Ready to transform your digital presence? Let's talk about your next project.</p>
+                <div class="cta-buttons scroll-reveal">
+                    <a href="mailto:hello@studio.com" class="btn-primary btn-large">
+                        <span>Start a Project</span>
+                        <div class="btn-arrow">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container footer-inner">
-            <span>&copy; 2025 Studio</span>
-            <div class="footer-links">
-                <a href="#">Twitter</a>
-                <a href="#">Instagram</a>
-                <a href="#">Dribbble</a>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h3 class="nav-logo">STUDIO</h3>
+                    <p>Creating digital experiences that inspire and engage.</p>
+                </div>
+                <div class="footer-nav">
+                    <div class="footer-col">
+                        <h4>Navigation</h4>
+                        <a href="#hero">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#services">Services</a>
+                        <a href="#work">Work</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Social</h4>
+                        <a href="#">Twitter / X</a>
+                        <a href="#">Instagram</a>
+                        <a href="#">Dribbble</a>
+                        <a href="#">LinkedIn</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Contact</h4>
+                        <a href="#">hello@studio.com</a>
+                        <a href="#">+1 234 567 890</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Studio. All rights reserved.</p>
+                <p>Crafted with passion</p>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
