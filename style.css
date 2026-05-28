@@ -27,6 +27,7 @@
 
 html {
     font-size: 16px;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -35,7 +36,6 @@ body {
     color: var(--light);
     overflow-x: hidden;
     line-height: 1.6;
-    cursor: none;
 }
 
 .container {
@@ -110,7 +110,7 @@ a { color: inherit; text-decoration: none; }
     height: 100%;
     width: 0;
     background: linear-gradient(90deg, var(--primary), var(--accent));
-    animation: loaderProgress 2s ease-in-out forwards;
+    animation: loaderProgress 1.5s ease-in-out forwards;
 }
 
 @keyframes loaderProgress {
@@ -131,40 +131,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 
-/* ============================================
-   CUSTOM CURSOR
-   ============================================ */
-.cursor-dot {
-    position: fixed;
-    width: 8px;
-    height: 8px;
-    background: var(--light);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99997;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, opacity 0.3s ease;
-    mix-blend-mode: difference;
-}
-
-.cursor-outline {
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    border: 1.5px solid rgba(255,255,255,0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99996;
-    transform: translate(-50%, -50%);
-    transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
-    mix-blend-mode: difference;
-}
-
-.cursor-outline.hovering {
-    width: 60px;
-    height: 60px;
-    border-color: var(--primary);
-}
+/* Custom cursor removed for better UX */
+.cursor-dot, .cursor-outline { display: none; }
 
 /* ============================================
    SCROLL PROGRESS BAR
@@ -1044,7 +1012,5 @@ a { color: inherit; text-decoration: none; }
     .footer-nav { grid-template-columns: 1fr; gap: 2rem; }
     .footer-bottom { flex-direction: column; gap: 0.5rem; }
     
-    /* Hide custom cursor on touch devices */
-    .cursor-dot, .cursor-outline { display: none; }
-    body { cursor: auto; }
+
 }
