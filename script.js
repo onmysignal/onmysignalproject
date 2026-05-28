@@ -1,362 +1,375 @@
 // ============================================
-// SCROLL ANIMATION ENGINE
+// UPGRADED SCROLL ANIMATION ENGINE
+// Using GSAP + ScrollTrigger + Lenis
 // ============================================
 
-class ScrollAnimator {
-    constructor() {
-        this.elements = [];
-        this.heroAnimated = false;
-        this.countersAnimated = false;
-        this.init();
-    }
+// Wait for everything to load
+window.addEventListener('load', () => {
+    initLoader();
+});
 
-    init() {
-        // Wait for DOM
-        this.setupScrollObserver();
-        this.setupHeroAnimation();
-        this.setupTextReveal();
-        this.setupParallax();
-        this.setupNavbarScroll();
-        this.setupCounters();
-        this.setupSmoothScroll();
-    }
-
-    // ============================================
-    // Intersection Observer for scroll animations
-    // ============================================
-    setupScrollObserver() {
-        const options = {
-            root: null,
-            rootMargin: '0px 0px -100px 0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
-            });
-        }, options);
-
-        // Observe all elements with data-scroll attribute
-        document.querySelectorAll('[data-scroll]').forEach(el => {
-            observer.observe(el);
-        });
-    }
-
-    // ============================================
-    // Hero Section Animation (on load)
-    // ============================================
-    setupHeroAnimation() {
-        const lines = document.querySelectorAll('.hero-title .line');
-        const subtitle = document.querySelector('.hero-subtitle');
-        const scrollIndicator = document.querySelector('.scroll-indicator');
-
-        // Animate hero elements on page load
+// ============================================
+// PAGE LOADER
+// ============================================
+function initLoader() {
+    const loader = document.querySelector('.loader');
+    
+    setTimeout(() => {
+        loader.classList.add('loaded');
+        // Start animations after loader
         setTimeout(() => {
-            lines.forEach((line, index) => {
-                setTimeout(() => {
-                    line.style.opacity = '1';
-                    line.style.transform = 'translateY(0)';
-                    line.style.transition = `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.15}s`;
-                }, index * 150);
-            });
-
-            setTimeout(() => {
-                subtitle.style.opacity = '1';
-                subtitle.style.transform = 'translateY(0)';
-                subtitle.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-            }, lines.length * 150 + 200);
-
-            setTimeout(() => {
-                scrollIndicator.style.opacity = '1';
-                scrollIndicator.style.transform = 'translateY(0)';
-                scrollIndicator.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-            }, lines.length * 150 + 400);
+            initApp();
         }, 300);
-    }
-
-    // ============================================
-    // Text Reveal on Scroll
-    // ============================================
-    setupTextReveal() {
-        const revealTexts = document.querySelectorAll('.reveal-text');
-
-        revealTexts.forEach(text => {
-            // Split text into words
-            const words = text.textContent.split(' ');
-            text.innerHTML = words.map(word => 
-                `<span class="word">${word}</span>`
-            ).join(' ');
-        });
-
-        // Animate words based on scroll position
-        window.addEventListener('scroll', () => {
-            revealTexts.forEach(text => {
-                const rect = text.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-
-                if (rect.top < windowHeight * 0.8 && rect.bottom > 0) {
-                    const words = text.querySelectorAll('.word');
-                    const progress = 1 - (rect.top / (windowHeight * 0.8));
-                    const wordsToReveal = Math.floor(progress * words.length);
-
-                    words.forEach((word, index) => {
-                        if (index < wordsToReveal) {
-                            word.classList.add('active');
-                        } else {
-                            word.classList.remove('active');
-                        }
-                    });
-                }
-            });
-        });
-    }
-
-    // ============================================
-    // Parallax Effect
-    // ============================================
-    setupParallax() {
-        const parallaxElements = document.querySelectorAll('.parallax-image');
-
-        window.addEventListener('scroll', () => {
-            parallaxElements.forEach(el => {
-                const container = el.closest('.parallax-container');
-                const rect = container.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-
-                if (rect.top < windowHeight && rect.bottom > 0) {
-                    const scrollPercent = (windowHeight - rect.top) / (windowHeight + rect.height);
-                    const translateY = (scrollPercent - 0.5) * 60;
-                    el.style.transform = `translateY(${translateY}px)`;
-                }
-            });
-        });
-    }
-
-    // ============================================
-    // Navbar Scroll Effect
-    // ============================================
-    setupNavbarScroll() {
-        const navbar = document.querySelector('.navbar');
-        let lastScroll = 0;
-
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-
-            if (currentScroll > 100) {
-                navbar.style.padding = '1rem 3rem';
-                navbar.style.background = 'rgba(10, 10, 15, 0.95)';
-            } else {
-                navbar.style.padding = '1.5rem 3rem';
-                navbar.style.background = 'rgba(10, 10, 15, 0.8)';
-            }
-
-            lastScroll = currentScroll;
-        });
-    }
-
-    // ============================================
-    // Animated Counters
-    // ============================================
-    setupCounters() {
-        const counters = document.querySelectorAll('.counter-number');
-        const counterSection = document.querySelector('.counter-section');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !this.countersAnimated) {
-                    this.countersAnimated = true;
-                    counters.forEach(counter => {
-                        this.animateCounter(counter);
-                    });
-                }
-            });
-        }, { threshold: 0.5 });
-
-        if (counterSection) {
-            observer.observe(counterSection);
-        }
-    }
-
-    animateCounter(element) {
-        const target = parseInt(element.getAttribute('data-target'));
-        const duration = 2000;
-        const step = target / (duration / 16);
-        let current = 0;
-
-        const timer = setInterval(() => {
-            current += step;
-            if (current >= target) {
-                element.textContent = target;
-                clearInterval(timer);
-            } else {
-                element.textContent = Math.floor(current);
-            }
-        }, 16);
-    }
-
-    // ============================================
-    // Smooth Scroll for nav links
-    // ============================================
-    setupSmoothScroll() {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(anchor.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    }
+    }, 2500);
 }
 
 // ============================================
-// Custom Cursor Trail Effect
+// MAIN APP INIT
 // ============================================
-class CursorEffect {
-    constructor() {
-        this.trails = [];
-        this.maxTrails = 8;
-        this.init();
+function initApp() {
+    initSmoothScroll();
+    initCursor();
+    initScrollProgress();
+    initNavbar();
+    initHeroAnimations();
+    initScrollReveal();
+    initTextReveal();
+    initImageReveal();
+    initCounters();
+    initMagnetic();
+    initParallax();
+}
+
+// ============================================
+// SMOOTH SCROLL (LENIS)
+// ============================================
+let lenis;
+
+function initSmoothScroll() {
+    lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true,
+    });
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
     }
+    requestAnimationFrame(raf);
 
-    init() {
-        // Create trail elements
-        for (let i = 0; i < this.maxTrails; i++) {
-            const trail = document.createElement('div');
-            trail.style.cssText = `
-                position: fixed;
-                width: ${12 - i}px;
-                height: ${12 - i}px;
-                background: linear-gradient(135deg, #6c5ce7, #fd79a8);
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9999;
-                opacity: ${1 - (i * 0.12)};
-                transition: transform ${0.1 + i * 0.03}s ease;
-                transform: translate(-50%, -50%) scale(0);
-            `;
-            document.body.appendChild(trail);
-            this.trails.push(trail);
+    // Connect GSAP ScrollTrigger with Lenis
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(anchor.getAttribute('href'));
+            if (target) {
+                lenis.scrollTo(target);
+            }
+        });
+    });
+}
+
+// ============================================
+// CUSTOM CURSOR
+// ============================================
+function initCursor() {
+    const dot = document.querySelector('.cursor-dot');
+    const outline = document.querySelector('.cursor-outline');
+    
+    if (!dot || !outline) return;
+    
+    let mouseX = 0, mouseY = 0;
+    let outlineX = 0, outlineY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+    });
+
+    // Smooth follow for outline
+    function animateCursor() {
+        outlineX += (mouseX - outlineX) * 0.12;
+        outlineY += (mouseY - outlineY) * 0.12;
+        outline.style.left = outlineX + 'px';
+        outline.style.top = outlineY + 'px';
+        requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover effects
+    const hoverElements = document.querySelectorAll('a, button, .magnetic, .service-item, .project-card');
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            outline.classList.add('hovering');
+            dot.style.transform = 'translate(-50%, -50%) scale(0.5)';
+        });
+        el.addEventListener('mouseleave', () => {
+            outline.classList.remove('hovering');
+            dot.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+    });
+}
+
+// ============================================
+// SCROLL PROGRESS BAR
+// ============================================
+function initScrollProgress() {
+    const progressBar = document.querySelector('.scroll-progress');
+    
+    window.addEventListener('scroll', () => {
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (window.pageYOffset / scrollHeight) * 100;
+        progressBar.style.width = progress + '%';
+    });
+}
+
+// ============================================
+// NAVBAR SCROLL EFFECT
+// ============================================
+function initNavbar() {
+    const navbar = document.querySelector('.navbar');
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
         }
+    });
+}
 
-        let mouseX = 0, mouseY = 0;
-        let isMoving = false;
-        let timeout;
+// ============================================
+// HERO ANIMATIONS (GSAP)
+// ============================================
+function initHeroAnimations() {
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            isMoving = true;
+    // Animate character reveals
+    tl.to('.char-reveal', {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.15,
+    })
+    .to('.line-reveal', {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.1,
+    }, '-=0.6')
+    .to('.hero-scroll-indicator', {
+        opacity: 1,
+        duration: 0.6,
+    }, '-=0.3');
+}
 
-            this.trails.forEach((trail, i) => {
-                setTimeout(() => {
-                    trail.style.left = mouseX + 'px';
-                    trail.style.top = mouseY + 'px';
-                    trail.style.transform = 'translate(-50%, -50%) scale(1)';
-                }, i * 40);
-            });
 
-            clearTimeout(timeout);
-            timeout = setTimeout(() => {
-                this.trails.forEach(trail => {
-                    trail.style.transform = 'translate(-50%, -50%) scale(0)';
+// ============================================
+// SCROLL REVEAL (Intersection Observer + GSAP)
+// ============================================
+function initScrollReveal() {
+    const reveals = document.querySelectorAll('.scroll-reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                // For image reveals
+                const imageReveal = entry.target.querySelector('.image-reveal');
+                if (imageReveal) {
+                    imageReveal.classList.add('revealed');
+                }
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -80px 0px'
+    });
+
+    reveals.forEach(el => observer.observe(el));
+}
+
+// ============================================
+// TEXT REVEAL (Word by word on scroll)
+// ============================================
+function initTextReveal() {
+    const textElements = document.querySelectorAll('.big-text-reveal');
+
+    textElements.forEach(el => {
+        const text = el.textContent.trim();
+        const words = text.split(' ');
+        el.innerHTML = words.map(word => `<span class="word">${word}</span>`).join(' ');
+    });
+
+    // Scroll-based word reveal
+    window.addEventListener('scroll', () => {
+        textElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            if (rect.top < windowHeight * 0.85 && rect.bottom > 0) {
+                const words = el.querySelectorAll('.word');
+                const progress = Math.max(0, 1 - (rect.top / (windowHeight * 0.6)));
+                const wordsToReveal = Math.floor(progress * words.length * 1.2);
+
+                words.forEach((word, index) => {
+                    if (index < wordsToReveal) {
+                        word.classList.add('active');
+                    } else {
+                        word.classList.remove('active');
+                    }
                 });
-            }, 300);
+            }
         });
-    }
+    });
 }
 
 // ============================================
-// Magnetic Button Effect
+// IMAGE CLIP-PATH REVEAL
 // ============================================
-class MagneticButtons {
-    constructor() {
-        this.buttons = document.querySelectorAll('.cta-button');
-        this.init();
-    }
+function initImageReveal() {
+    const imageContainers = document.querySelectorAll('.about-image-container');
 
-    init() {
-        this.buttons.forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.05)`;
-            });
-
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = 'translate(0, 0) scale(1)';
-            });
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const reveal = entry.target.querySelector('.image-reveal');
+                if (reveal) {
+                    setTimeout(() => {
+                        reveal.classList.add('revealed');
+                    }, 200);
+                }
+            }
         });
-    }
+    }, { threshold: 0.2 });
+
+    imageContainers.forEach(el => observer.observe(el));
 }
 
 // ============================================
-// Tilt Effect on Cards
+// ANIMATED COUNTERS
 // ============================================
-class TiltEffect {
-    constructor() {
-        this.cards = document.querySelectorAll('.service-card, .testimonial-card');
-        this.init();
-    }
+function initCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    let animated = false;
 
-    init() {
-        this.cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width - 0.5;
-                const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-                card.style.transform = `
-                    perspective(1000px) 
-                    rotateY(${x * 10}deg) 
-                    rotateX(${-y * 10}deg)
-                    translateY(-5px)
-                `;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateY(0) rotateX(0) translateY(0)';
-            });
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !animated) {
+                animated = true;
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    animateCount(counter, target);
+                });
+            }
         });
+    }, { threshold: 0.5 });
+
+    const statsSection = document.querySelector('.about-stats');
+    if (statsSection) observer.observe(statsSection);
+}
+
+function animateCount(element, target) {
+    const duration = 2000;
+    const start = performance.now();
+
+    function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        element.textContent = Math.floor(eased * target);
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            element.textContent = target;
+        }
     }
+    requestAnimationFrame(update);
 }
 
 // ============================================
-// Initialize Everything
+// MAGNETIC EFFECT
 // ============================================
-document.addEventListener('DOMContentLoaded', () => {
-    new ScrollAnimator();
-    new CursorEffect();
-    new MagneticButtons();
-    new TiltEffect();
-});
+function initMagnetic() {
+    const magneticElements = document.querySelectorAll('.magnetic');
+
+    magneticElements.forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            gsap.to(el, {
+                x: x * 0.3,
+                y: y * 0.3,
+                duration: 0.4,
+                ease: 'power2.out'
+            });
+        });
+
+        el.addEventListener('mouseleave', () => {
+            gsap.to(el, {
+                x: 0,
+                y: 0,
+                duration: 0.6,
+                ease: 'elastic.out(1, 0.3)'
+            });
+        });
+    });
+}
 
 // ============================================
-// Scroll Progress Indicator
+// PARALLAX EFFECTS
 // ============================================
-const progressBar = document.createElement('div');
-progressBar.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #6c5ce7, #fd79a8);
-    z-index: 10001;
-    transition: width 0.1s linear;
-    width: 0%;
-`;
-document.body.appendChild(progressBar);
+function initParallax() {
+    // Parallax for gradient orbs
+    gsap.utils.toArray('.gradient-orb').forEach(orb => {
+        gsap.to(orb, {
+            y: () => Math.random() * 200 - 100,
+            scrollTrigger: {
+                trigger: orb.closest('section'),
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1,
+            }
+        });
+    });
 
-window.addEventListener('scroll', () => {
-    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = (window.pageYOffset / scrollHeight) * 100;
-    progressBar.style.width = scrollPercent + '%';
-});
+    // Parallax for project images
+    gsap.utils.toArray('.project-image').forEach(img => {
+        gsap.to(img, {
+            y: -40,
+            scrollTrigger: {
+                trigger: img.closest('.project-card'),
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1,
+            }
+        });
+    });
+
+    // Scale effect for section titles
+    gsap.utils.toArray('.section-title').forEach(title => {
+        gsap.from(title, {
+            scale: 0.95,
+            scrollTrigger: {
+                trigger: title,
+                start: 'top 85%',
+                end: 'top 50%',
+                scrub: 1,
+            }
+        });
+    });
+}
