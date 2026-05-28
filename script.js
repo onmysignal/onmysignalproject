@@ -3,8 +3,8 @@
 // Using GSAP + ScrollTrigger (lightweight)
 // ============================================
 
-// Wait for everything to load
-window.addEventListener('load', () => {
+// Start immediately — no waiting
+document.addEventListener('DOMContentLoaded', () => {
     initApp();
 });
 
@@ -28,10 +28,17 @@ function initApp() {
 function initScrollProgress() {
     const progressBar = document.querySelector('.scroll-progress');
     
+    let ticking = false;
     window.addEventListener('scroll', () => {
-        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = (window.pageYOffset / scrollHeight) * 100;
-        progressBar.style.width = progress + '%';
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (window.pageYOffset / scrollHeight) * 100;
+                progressBar.style.width = progress + '%';
+                ticking = false;
+            });
+            ticking = true;
+        }
     }, { passive: true });
 }
 
@@ -40,38 +47,54 @@ function initScrollProgress() {
 // ============================================
 function initNavbar() {
     const navbar = document.querySelector('.navbar');
+    let lastScroll = 0;
     
     window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 100) {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > 100) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
+        lastScroll = currentScroll;
     }, { passive: true });
 }
 
 // ============================================
-// HERO ANIMATIONS (GSAP)
+// HERO ANIMATIONS (GSAP — GPU accelerated)
 // ============================================
 function initHeroAnimations() {
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+    // Force GPU compositing for hero elements
+    gsap.set('.char-reveal', { willChange: 'transform, opacity' });
+    gsap.set('.line-reveal', { willChange: 'transform, opacity' });
 
+    const tl = gsap.timeline({ 
+        defaults: { ease: 'power3.out', force3D: true }
+    });
+
+    // Animate title lines
     tl.to('.char-reveal', {
         y: 0,
         opacity: 1,
-        duration: 1,
-        stagger: 0.12,
+        duration: 0.9,
+        stagger: 0.1,
     })
+    // Animate other line-reveal elements (description, CTA, cards)
     .to('.line-reveal', {
         y: 0,
         opacity: 1,
-        duration: 0.7,
-        stagger: 0.08,
-    }, '-=0.5')
+        duration: 0.6,
+        stagger: 0.06,
+    }, '-=0.4')
+    // Show scroll indicator
     .to('.hero-scroll-indicator', {
         opacity: 1,
-        duration: 0.5,
-    }, '-=0.2');
+        duration: 0.4,
+    }, '-=0.2')
+    // Cleanup willChange after animation completes
+    .call(() => {
+        gsap.set('.char-reveal, .line-reveal', { willChange: 'auto' });
+    });
 }
 
 // ============================================
@@ -88,6 +111,8 @@ function initScrollReveal() {
                 if (imageReveal) {
                     imageReveal.classList.add('revealed');
                 }
+                // Stop observing once revealed
+                observer.unobserve(entry.target);
             }
         });
     }, {
@@ -110,7 +135,6 @@ function initTextReveal() {
         el.innerHTML = words.map(word => `<span class="word">${word}</span>`).join(' ');
     });
 
-    // Use requestAnimationFrame for better performance
     let ticking = false;
     window.addEventListener('scroll', () => {
         if (!ticking) {
@@ -153,6 +177,7 @@ function initImageReveal() {
                 if (reveal) {
                     reveal.classList.add('revealed');
                 }
+                observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.15 });

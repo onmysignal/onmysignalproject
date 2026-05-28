@@ -246,20 +246,19 @@ a { color: inherit; text-decoration: none; }
     align-items: center;
     gap: 1rem;
     padding: 1.2rem 1.8rem;
-    background: rgba(22, 22, 31, 0.8);
+    background: rgba(22, 22, 31, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
-    backdrop-filter: blur(10px);
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--light);
-    transition: transform 0.6s var(--transition), box-shadow 0.4s ease;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .visual-card:hover {
-    transform: translateY(-4px) !important;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     border-color: rgba(108, 92, 231, 0.3);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }
 
 .card-icon {
@@ -276,25 +275,34 @@ a { color: inherit; text-decoration: none; }
 .card-1 {
     top: 20px;
     left: 10%;
-    animation: floatCard 6s ease-in-out infinite;
+    animation: floatCard1 5s ease-in-out infinite;
 }
 
 .card-2 {
     top: 50%;
     right: 5%;
-    transform: translateY(-50%);
-    animation: floatCard 7s ease-in-out infinite 1s;
+    animation: floatCard2 6s ease-in-out infinite;
 }
 
 .card-3 {
     bottom: 40px;
     left: 15%;
-    animation: floatCard 8s ease-in-out infinite 2s;
+    animation: floatCard3 7s ease-in-out infinite;
 }
 
-@keyframes floatCard {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+@keyframes floatCard1 {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -10px, 0); }
+}
+
+@keyframes floatCard2 {
+    0%, 100% { transform: translate3d(0, -50%, 0); }
+    50% { transform: translate3d(0, calc(-50% - 10px), 0); }
+}
+
+@keyframes floatCard3 {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -10px, 0); }
 }
 
 .hero-shape {
@@ -305,13 +313,8 @@ a { color: inherit; text-decoration: none; }
     width: 280px;
     height: 280px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(108,92,231,0.15), transparent 70%);
-    animation: shapeGlow 4s ease-in-out infinite;
-}
-
-@keyframes shapeGlow {
-    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+    background: radial-gradient(circle, rgba(108,92,231,0.12), transparent 70%);
+    opacity: 0.6;
 }
 
 .line-reveal {
@@ -448,21 +451,17 @@ a { color: inherit; text-decoration: none; }
 .gradient-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.25;
+    filter: blur(80px);
+    opacity: 0.2;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
-.orb-1 { width: 600px; height: 600px; background: var(--primary); top: -200px; right: -200px; animation: orbFloat 10s ease-in-out infinite; }
-.orb-2 { width: 400px; height: 400px; background: var(--accent); bottom: -100px; left: -100px; animation: orbFloat 12s ease-in-out infinite reverse; }
-.orb-3 { width: 300px; height: 300px; background: var(--accent-2); top: 40%; left: 60%; animation: orbFloat 8s ease-in-out infinite 2s; }
-.orb-4 { width: 500px; height: 500px; background: var(--primary); top: -150px; left: -150px; animation: orbFloat 11s ease-in-out infinite; }
-.orb-5 { width: 400px; height: 400px; background: var(--accent); bottom: -100px; right: -100px; animation: orbFloat 9s ease-in-out infinite 1s; }
-
-@keyframes orbFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(30px, -30px) scale(1.05); }
-    66% { transform: translate(-20px, 20px) scale(0.95); }
-}
+.orb-1 { width: 500px; height: 500px; background: var(--primary); top: -200px; right: -200px; }
+.orb-2 { width: 350px; height: 350px; background: var(--accent); bottom: -100px; left: -100px; }
+.orb-3 { width: 250px; height: 250px; background: var(--accent-2); top: 40%; left: 60%; }
+.orb-4 { width: 400px; height: 400px; background: var(--primary); top: -150px; left: -150px; }
+.orb-5 { width: 350px; height: 350px; background: var(--accent); bottom: -100px; right: -100px; }
 
 
 /* ============================================
